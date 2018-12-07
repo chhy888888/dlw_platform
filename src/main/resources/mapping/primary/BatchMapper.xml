@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dlw.monitor.platform.mapper.primary.BatchMapper" >
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";"> 
+    update tm_dt
+    <set>
+    	  SFYJ = 
+	   #{item.SF_YJ,jdbcType=VARCHAR},
+	    DF = #{item.DF,jdbcType=INTEGER},
+	    ZT_ID = #{item.ztId,jdbcType=VARCHAR},
+	    YJR_ID = #{item.YJR_ID,jdbcType=VARCHAR},
+	    xgr_id = #{item.xgr_id,jdbcType=VARCHAR},
+	    xg_sj = #{item.xg_sj,jdbcType=VARCHAR}
+	</set>
+	    WHERE 
+	   	 ID= #{item.ID,jdbcType=VARCHAR}
+    </foreach>
+ </update>
+  <select id="selectAllByJD" resultType="map" parameterType="java.lang.String" >
+    ${sql}
+  </select>
+</mapper>
