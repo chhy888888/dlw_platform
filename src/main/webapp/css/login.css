@@ -1,0 +1,39 @@
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {margin: 0;padding: 0;}
+fieldset, img, input, button {   border: none; padding: 0;   margin: 0;   outline-style: none;}
+ul, ol {    list-style: none; }
+input {    padding-top: 0;    padding-bottom: 0;}
+select, input {    vertical-align: middle;}
+select, input, textarea { font-size: 14px;  margin: 0;}
+img { border: 0;    vertical-align: middle; }
+table {   border-collapse: collapse;}
+body {    font-family:  Microsoft YaHei, Arial, "\5b8b\4f53";    background:url(../img/bg.png);}
+
+
+*{ font-family:"microsoft yahei";}
+
+
+.login{width: 1000px;height: 500px;    position: absolute;    left:50%;    top:50%;    margin-left: -500px;    margin-top: -250px;}
+.login>.login_title{    height: 60px;    text-align: center;}
+.login>.login_title>p{    color:#fff;    font-size: 40px;      margin-top: -8px; }
+.login>.login_main{    width: 1000px;    height: 320px; position:relative}
+.login>.login_main:after{ position:absolute; content:""; width:1100px; height:40px; left:-45px; bottom:-20px; background:url(../img/type.png) no-repeat bottom center;}
+.login>.login_main>.main_left{    height: 320px;    width: 650px;    float: left;    border-top-left-radius: 3px;    border-bottom-left-radius: 3px;    background: url(../img/login_left.png) no-repeat;}
+.login>.login_main>.main_right{    height: 320px;    width: 350px;    float: right;    background-color: #e9eef2;
+    border-top-right-radius: 3px;   border-bottom-right-radius: 3px;}
+.login>.login_main>.main_right>.right_title{    color:#111; font-size: 22px;  text-align: center;  height: 60px;    margin-bottom: 25px;}
+.login>.login_main>.main_right>.right_title img{ margin-top:30px;} 
+.login>.login_main>.main_right>form>div{   position: relative;} 
+.login>.login_main>.main_right>form>div>img{    position: absolute;   left: 62px;  top:7px;}
+.login>.login_main>.main_right>form input{ height: 35px; line-height:35px; width: 250px;width: 210px\9; border: 1px solid #d3d8dc; box-sizing: border-box; margin-bottom: 15px; margin-left: 50px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;  color:#333; padding-left: 40px;}
+.login>.login_main>.main_right>form>.code{ height:55px;}
+.login>.login_main>.main_right>form>.code>input{   width: 150px;width: 100px\9;float: left;}
+.login>.login_main>.main_right>form>.code>.code_img{ width: 90px; height: 35px; float: right; padding-top:5px;  margin-right: 50px;   cursor: pointer;}
+ 
+.login>.login_main>.main_right>form input:focus{ border: 1px solid #999;}
+.login>.login_main>.main_right>form>.yes_login>a{ display: block; width: 250px;  height: 35px; line-height: 35px; text-align: center;
+    background-color: #FF7F00; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; color:#fff; text-decoration: none; margin-left: 50px;  }
+.login>.login_main>.main_right>form>.yes_login>a:hover{   background-color: #DB6D00;}
+.login>.login_footer{   text-align: center;   padding-top: 20px;}
+.login>.login_footer>p{  font-size: 12px;   color:#eee;   line-height: 30px; opacity:0.6}
+
+

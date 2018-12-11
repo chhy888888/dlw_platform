@@ -46,7 +46,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		if(null == mapUser){
 			loginR = false;
 		}
-		RandomNumber ra = new RandomNumber();
+		/*RandomNumber ra = new RandomNumber();
 		String sql = ra.getSelectInfo("sys_urls", new HashMap<String,String>());
 		List<HashMap<String,String>> list = baseMapper.selectAllByPage(sql);
 		String urls = "";
@@ -57,13 +57,13 @@ public class SessionInterceptor implements HandlerInterceptor {
 		if(request.getRequestURI().startsWith("/system")){
 			bo = true;
 		}else{
-		}
-		if((!request.getRequestURI().startsWith("/api/manager") && !request.getRequestURI().startsWith("/api/system") && !urls.contains(request.getRequestURI())) && !loginR){
+		}*/
+//		if((!request.getRequestURI().startsWith("/api/manager") && !request.getRequestURI().startsWith("/api/system") && !urls.contains(request.getRequestURI())) && !loginR){
 			/*String str = "<script type='text/javascript'>parent.window.location.href = '"+basePath+"exportfactoring/login';</script>";
 			response.setCharacterEncoding("utf-8");
 			PrintWriter pw = response.getWriter();
 			pw.print(str);*/
-			int code = 0;
+			/*int code = 0;
 			if(!loginR){
 				code = 403;
 			}else{
@@ -72,7 +72,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 			bo = false;
 			PrintWriter pw = response.getWriter();
 			responseMessage(response,pw,code,bo);
-		}else{
+		}else{*/
 			/*int code = 200;
 			PrintWriter pw = response.getWriter();
 			responseMessage(response,pw,code,bo);*/
@@ -83,7 +83,14 @@ public class SessionInterceptor implements HandlerInterceptor {
 			bo = false;
 			PrintWriter pw = response.getWriter();
 			responseMessage(response,pw,code,bo);*/
-		}
+//		}
+		/*if(!loginR){
+			bo = false;
+			String str = "<script type='text/javascript'>parent.window.location.href = '"+basePath+"exportfactoring/login';</script>";
+			response.setCharacterEncoding("utf-8");
+			PrintWriter pw = response.getWriter();
+			pw.print(str);
+		}*/
 		return bo;
 	}
 

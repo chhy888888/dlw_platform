@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.auth0.jwt.internal.org.apache.commons.lang3.StringUtils;
 import com.dlw.monitor.platform.mapper.primary.BaseMapper;
 import com.dlw.monitor.platform.mypublicClass.RandomNumber;
 import com.dlw.monitor.platform.mypublicClass.passwordEncryption;
