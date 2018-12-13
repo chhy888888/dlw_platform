@@ -1,5 +1,8 @@
 package com.dlw.monitor.platform.service.system.impl;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dlw.monitor.platform.mapper.primary.BaseMapper;
 import com.dlw.monitor.platform.mypublicClass.RandomNumber;
@@ -118,6 +123,29 @@ public class SystemServiceImpl implements SystemService {
 		return baseMapper.update(sql);
 	}
 	public HashMap<String,String> updateUserInfo(HttpServletRequest request) {
+		System.out.println(request.getParameter("p1"));
+		MultipartHttpServletRequest params=((MultipartHttpServletRequest) request); 		
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");   
+		 String name=params.getParameter("fileImport");
+		 System.out.println("name:"+name); 
+		 String id=params.getParameter("fileImport");  
+         System.out.println("id:"+id); 
+         MultipartFile file = null;    
+         BufferedOutputStream stream = null;
+         for (int i = 0; i < files.size(); ++i) {
+        	 file = files.get(i); 
+             if (!file.isEmpty()){
+            	 try {
+            		 byte[] bytes = file.getBytes();    
+                     stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+                     stream.write(bytes);    
+                     stream.close();
+            	 }catch (Exception e) {
+            		 e.printStackTrace();
+            	 }
+        	 }
+         }
+		 
 		HashMap<String,String> wheremap = new HashMap<String,String>();
 		HashMap<String,String> wheremapgl = new HashMap<String,String>();
 		HashMap<String,String> updatemap = ra.getRequestInfo(request);
