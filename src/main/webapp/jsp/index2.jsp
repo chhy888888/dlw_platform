@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
     <title> </title>
-        <link rel="stylesheet" type="text/css" href="<%=basePath %>css/default.css" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath %>css/default.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>js/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>js/themes/icon.css" />
 	<script type="text/javascript" src="<%=basePath %>js/jquery-1.4.2.min.js"></script>

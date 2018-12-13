@@ -1,30 +1,106 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd>
+<!DOCTYPE html>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; UTF-8">
-  
     <base href="<%=basePath%>">
     <title>待审核</title>
- 	<link rel="stylesheet" type="text/css" href="<%=basePath %>css/login.css">
+ 	
+    <link rel="stylesheet" type="text/css" href="<%=basePath %>css/default.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>js/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath %>js/themes/icon.css" />
-    <script type="text/javascript" src="<%=basePath %>js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="<%=basePath %>js/jQuery.easyui.js"></script>
-  </head>
+	<script type="text/javascript" src="<%=basePath %>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath %>js/jquery.easyui.min.js"></script>
   <script type="text/javascript">
   	$(function(){
   		/* $("#change").click(function(){
 			$("#checkCodeImg").attr("src","jsp/rand.jsp?dt="+new Date().getTime());
 			return false;
 		}); */
+		//上传保存
+		$("#uploadbutton").click(function () {
+			var filename = $("#scsxedzl").val();
+			filename = filename.split("\\")[filename.split("\\").length - 1];
+			var af_fnid = $("#fn_id").val();
+			var af_fieldname = "fn_id";
+			var af_descript = filename;
+			var af_path = "http://139.196.85.212/doc/usr/2018111415423473951.png";
+			$.ajax({
+	  	        url: "<%=basePath %>financing/getaddAttachmentsInfo",
+	  	     	data : {af_fnid:af_fnid,af_fieldname:af_fieldname,af_descript:af_descript,af_path:af_path},
+	  	        type : "post",
+	  	        dataType: "text",
+	  	        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	  	        success: function (dataInfo) {
+	  	        	alert("<>"+dataInfo);
+	  	        }
+	  	    });
+		});
   	})
-	
+  	//发送邮件
+	function getfsyj(obj){
+		//var uls = "<%=basePath %>financing/getComInfoEmil?emil="+ obj;
+		var uls = "<%=basePath %>mail/send";
+		uls = uls;
+		$.ajax({
+			type : "post",
+			url : uls,
+			dataType : "text",
+			async : false,
+			success : function(dataInfo) {
+				alert(dataInfo);
+			}
+		});
+	}
+  	function updateUser(){
+  		<%-- $("#myForm").form("submit", {    
+            url:"<%=basePath%>system/getupdateUserInfo",  
+            success:function(data){
+            	alert(33);
+          	   /* var json=$.parseJSON(data);
+              $.messager.alert('温馨提示',json.message,'info');
+              if(json.success){
+                    $('#sysdatabase').datagrid('reload');
+              } */
+            }
+      }); --%> 
+      debugger;
+  		$('#myForm').form('submit', {
+  		    url:"<%=basePath%>system/getupdateUserInfo?ss=1&"+$(this).serialize(),
+  		    onSubmit: function(param){
+  				param.p1 = 'value1';
+  				param.p2 = 'value2';
+  		    },
+  		  success:function(data){
+  			alert(2222)
+  	   	 }
+  		});
+  		<%-- $.post("<%=basePath%>system/getupdateUserInfo", $('#myForm').serialize(), function (result) {
+            alert(34);
+        }); --%>
+  		<%-- if ($('#myForm').form("validate"))
+        {
+            $.post("<%=basePath%>system/getupdateUserInfo", $('#myForm').serialize(), function (result) {
+                /* if (result.success == true) {
+                    $('#dlg').dialog('close');
+                    $('#dg').datagrid('reload');
+                }
+                else {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.message
+                    });
+                } */   
+                alert(34);
+            });
+        } --%>
+  	}
 	<%-- // 回车登陆 
 	$(document).keyup(function(event){
           if(event.keyCode ==13){  
@@ -42,7 +118,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#fromadd").submit();
 	} --%>
   </script>
- <body class="easyui-layout" style="overflow-y: hidden"  scroll="no">
+  </head>
+ <body class="easyui-layout" style="overflow-y: hidden"  scroll="yes">
 <noscript>
 <div style=" position:absolute; z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
     <img src="images/noscript.gif" alt='抱歉，请开启脚本支持！' />
@@ -63,72 +140,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 
     </div> -->
-    <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
-        <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
-        	<span>状态：完善信息</span>
-        	用户名：xxx
-        	密   码：*******
-        	企业信息
-        	<div style="padding:10px 60px 20px 60px">
-	    <form id="ff" method="post">
-	    	<table cellpadding="5">
-	    		<tr>
-	    			<td>Name:</td>
-	    			<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>Email:</td>
-	    			<td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>Subject:</td>
-	    			<td><input class="easyui-textbox" type="text" name="subject" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>Message:</td>
-	    			<td><input class="easyui-textbox" name="message" data-options="multiline:true" style="height:60px"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>Language:</td>
-	    			<td>
-	    				<select class="easyui-combobox" name="language">
-	    				<option value="ar">Arabic</option>
-	    				<option value="bg">Bulgarian</option>
-	    				<option value="ca">Catalan</option>
-	    				<option value="zh-cht">Chinese Traditional</option>
-	    				<option value="cs">Czech</option>
-	    				<option value="da">Danish</option>
-	    				<option value="nl">Dutch</option>
-	    				<option value="en" selected="selected">English</option>
-	    				<option value="et">Estonian</option>
-	    				<option value="fi">Finnish</option>
-	    				<option value="fr">French</option>
-	    				<option value="de">German</option>
-	    				<option value="el">Greek</option>
-	    				<option value="ht">Haitian Creole</option>
-	    				<option value="he">Hebrew</option>
-	    				<option value="hi">Hindi</option>
-	    				<option value="mww">Hmong Daw</option>
-	    				<option value="hu">Hungarian</option>
-	    				<option value="id">Indonesian</option>
-	    				<option value="it">Italian</option>
-	    				<option value="ja">Japanese</option>
-	    				<option value="ko">Korean</option>
-	    				<option value="lv">Latvian</option>
-	    				<option value="lt">Lithuanian</option>
-	    				<option value="no">Norwegian</option>
-	    				<option value="fa">Persian</option>
-	    				<option value="pl">Polish</option>
-	    				<option value="pt">Portuguese</option>
-	    				<option value="ro">Romanian</option>
-	    				<option value="ru">Russian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sv">Swedish</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="vi">Vietnamese</option></select>
-	    			</td>
-	    		</tr>
-	    	</table>
-	    </form>
-	    </div>
-        	
+    <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden;" title="完善信息" >
+        <div id="tabs" class="easyui-tabs" border="false" align="center">
+        <div class="easyui-panel" title="" align="center" fit="true">
+        <form id="myForm"  method="post" enctype="multipart/form-data">
+        <table>
+        	<tr>
+        		<td>公司名称(Company Name):</td>
+        		<td><c:out value="${userMap.cul_name_cn }"></c:out></td>
+        	</tr>
+        	<tr>
+        		<td>公司地址(Street And Number PO Box):</td>
+        		<td><input class="textbox" type="text" name="ent_address" data-options="required:true" style="width:200px;height:32px"></td>
+        		<td>邮政编码(Postcode):</td>
+        		<td><input class="textbox" type="text"  name="code" data-options="required:true" style="width:200px;height:32px"></td>
+        	</tr>
+        	<tr>
+        		<td>法人代表姓名(Person in charge):</td>
+        		<td><input class="textbox" type="text"  name="mname" data-options="required:true" style="width:200px;height:32px"></td>
+        		<td>公司邮箱(Email):</td>
+        		<td>
+        		<input class="textbox" type="text"  name="mname" data-options="required:true" style="width:200px;height:32px">
+        		<a class="easyui-linkbutton" style="width:150px;height:32px" onclick="getfsyj('15591640@qq.com')">发送邮件</a>
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>邮箱验证码：</td>
+        		<td><input class="textbox" type = "text" id = "yzm" style="width:200px;height:32px"></td>
+        		<td>联系电话(Mobile):</td>
+        		<td>
+        		<input class="textbox" type="text"  name="mname" data-options="required:true" style="width:200px;height:32px">
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>财务报表:</td>
+        		<td colspan="4">
+        		<input class="easyui-filebox" id="fileImport" name="fileImport" style="width:200px;height:32px">
+        		<input class="easyui-filebox" id="fileImports" name="fileImports" style="width:200px;height:32px">
+        		</td>
+        	</tr>
+        	<tr>
+        		<td colspan="4"><button type="button" class="easyui-linkbutton" iconCls="icon-ok" style="width:50%;height:32px" onclick="updateUser()">提交</button></td>
+        	</tr>
+        </table>
+		</form>
 		</div>
+	</div>
     </div>
     
     

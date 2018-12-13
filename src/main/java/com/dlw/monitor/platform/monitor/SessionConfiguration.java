@@ -1,5 +1,6 @@
 package com.dlw.monitor.platform.monitor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -10,6 +11,7 @@ import lombok.AllArgsConstructor;
 @Configuration
 @AllArgsConstructor
 public class SessionConfiguration extends WebMvcConfigurerAdapter {
+	@Autowired
 	 private SessionInterceptor  sessionInterceptor;
 	/*@Bean   
     public HandlerInterceptor getMyInterceptor(){
